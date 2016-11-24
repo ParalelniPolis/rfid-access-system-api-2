@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .page-header
+    h3 Cards
+
+  if cards
+    table.table
+      tr
+        th ID
+        th Name
+        th Description
+        th
+      for card in cards
+        tr
+          td= card.uid
+          td= card.name
+          td= card.description
+          td.text-right
+            .btn-group
+              a.btn.btn-primary(href='/cards/' + card.uid) Manage
+              a.btn.btn-danger(href='/cards/delete/' + card.uid, onClick='return confirm("Really delete this card?")') Delete
+  else
+    h4 No cards found
