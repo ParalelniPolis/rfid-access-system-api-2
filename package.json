@@ -12,7 +12,8 @@
   "scripts": {
     "start": "node app.js",
     "test": "mocha --reporter spec",
-    "lint": "eslint **/*.js"
+    "lint": "eslint **/*.js",
+    "postinstall": "npm rebuild node-sass"
   },
   "dependencies": {
     "async": "^2.1.2",

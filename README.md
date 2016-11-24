@@ -2,6 +2,10 @@
 
 Web API for [RFID access system](https://github.com/ParalelniPolis/rfid-locks) at [Paralelni Polis](https://www.paralelnipolis.cz/).
 
+[![CircleCI](https://circleci.com/gh/ParalelniPolis/rfid-access-system-api-2/tree/master.svg?style=svg)](https://circleci.com/gh/ParalelniPolis/rfid-access-system-api-2/tree/master)
+[![Status of Dependencies](https://david-dm.org/ParalelniPolis/rfid-access-system-api-2.svg)](https://david-dm.org/ParalelniPolis/rfid-access-system-api-2)
+
+
 ## Dependencies
 
 * [Node.js](https://nodejs.org/) >= 6.0.0
