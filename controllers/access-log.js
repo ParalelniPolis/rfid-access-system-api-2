@@ -5,10 +5,6 @@ const Log = require('../models/Log');
  * Access Log page.
  */
 exports.index = (req, res, next) => {
-  if (!req.user) {
-    return res.redirect('/login');
-  }
-
   Log.find((err, logs) => {
     if (err) { return next(err); }
 

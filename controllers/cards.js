@@ -18,10 +18,6 @@ const renderDetail = (res, card, locks) => {
  * Cards page.
  */
 exports.index = (req, res, next) => {
-  if (!req.user) {
-    return res.redirect('/login');
-  }
-
   Card.find()
     .populate('locks')
     .exec((err, cards) => {
@@ -41,10 +37,6 @@ exports.index = (req, res, next) => {
  * Card detail page.
  */
 exports.showCard = (req, res, next) => {
-  if (!req.user) {
-    return res.redirect('/login');
-  }
-
   Card.findOne({ uid: req.params.id })
     .populate('locks')
     .exec((err, card) => {
@@ -89,10 +81,6 @@ exports.showCard = (req, res, next) => {
  * Card detail update.
  */
 exports.updateCard = (req, res, next) => {
-  if (!req.user) {
-    return res.redirect('/login');
-  }
-
   req.assert('name').notEmpty();
 
   Card.findOneAndUpdate({ uid: req.params.id }, {
@@ -115,10 +103,6 @@ exports.updateCard = (req, res, next) => {
  * Delete card
  */
 exports.deleteCard = (req, res, next) => {
-  if (!req.user) {
-    return res.redirect('/login');
-  }
-
   Card.findOneAndRemove({ uid: req.params.id }, (err) => {
     if (err) return next(err);
 

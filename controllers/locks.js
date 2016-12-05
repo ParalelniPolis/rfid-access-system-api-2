@@ -6,10 +6,6 @@ const Card = require('../models/Card');
  * Locks page.
  */
 exports.index = (req, res, next) => {
-  if (!req.user) {
-    return res.redirect('/login');
-  }
-
   Lock.find((err, locks) => {
     if (err) return next(err);
 
@@ -27,10 +23,6 @@ exports.index = (req, res, next) => {
  * Card detail page.
  */
 exports.showLock = (req, res, next) => {
-  if (!req.user) {
-    return res.redirect('/login');
-  }
-
   Lock.findOne({ uid: req.params.id }, (err, lock) => {
     if (err) return next(err);
 
@@ -51,10 +43,6 @@ exports.showLock = (req, res, next) => {
  * Create new lock.
  */
 exports.postLock = (req, res, next) => {
-  if (!req.user) {
-    return res.redirect('/login');
-  }
-
   req.assert('uid').notEmpty();
   req.assert('name').notEmpty();
 
@@ -93,10 +81,6 @@ exports.postLock = (req, res, next) => {
  * Delete lock.
  */
 exports.deleteLock = (req, res, next) => {
-  if (!req.user) {
-    return res.redirect('/login');
-  }
-
   Lock.findOneAndRemove({ uid: req.params.id }, (err) => {
     if (err) { return next(err); }
 

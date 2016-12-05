@@ -127,15 +127,15 @@ app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
-app.get('/locks', locksController.index);
-app.get('/locks/:id', locksController.showLock);
-app.post('/locks', locksController.postLock);
-app.get('/locks/delete/:id', locksController.deleteLock);
-app.get('/cards', cardsController.index);
-app.get('/cards/:id', cardsController.showCard);
-app.post('/cards/:id', cardsController.updateCard);
-app.get('/cards/delete/:id', cardsController.deleteCard);
-app.get('/access-log', logController.index);
+app.get('/locks', passportConfig.isAuthenticated, locksController.index);
+app.get('/locks/:id', passportConfig.isAuthenticated, locksController.showLock);
+app.post('/locks', passportConfig.isAuthenticated, locksController.postLock);
+app.get('/locks/delete/:id', passportConfig.isAuthenticated, locksController.deleteLock);
+app.get('/cards', passportConfig.isAuthenticated, cardsController.index);
+app.get('/cards/:id', passportConfig.isAuthenticated, cardsController.showCard);
+app.post('/cards/:id', passportConfig.isAuthenticated, cardsController.updateCard);
+app.get('/cards/delete/:id', passportConfig.isAuthenticated, cardsController.deleteCard);
+app.get('/access-log', passportConfig.isAuthenticated, logController.index);
 app.get('/api/v1/access', apiController.index);
 
 /**
