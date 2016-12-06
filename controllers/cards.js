@@ -2,8 +2,15 @@ const Card = require('../models/Card');
 const Lock = require('../models/Lock');
 
 /**
- * Private render function
- * Card detail
+ * Log module.
+ * @module controllers/cards
+ */
+
+/**
+ * Private render function - Card Detail
+ * @param  {Object} res - Express Response Object
+ * @param  {Object} card - Card Object
+ * @param  {Object[]} locks - Array of all locks
  */
 const renderDetail = (res, card, locks) => {
   res.render('card', {
@@ -14,8 +21,10 @@ const renderDetail = (res, card, locks) => {
 };
 
 /**
- * GET /cards
- * Cards page.
+ * GET /cards - Cards page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.index = (req, res, next) => {
   Card.find()
@@ -33,8 +42,10 @@ exports.index = (req, res, next) => {
 };
 
 /**
- * GET /cards/:id
- * Card detail page.
+ * GET /cards/:id - Card detail page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.showCard = (req, res, next) => {
   Card.findOne({ uid: req.params.id })
@@ -77,8 +88,10 @@ exports.showCard = (req, res, next) => {
 };
 
 /**
- * POST /cards/:id
- * Card detail update.
+ * POST /cards/:id - Card detail update.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.updateCard = (req, res, next) => {
   req.assert('name').notEmpty();
@@ -99,8 +112,10 @@ exports.updateCard = (req, res, next) => {
 };
 
 /**
- * GET /cards/delete/:id
- * Delete card
+ * GET /cards/delete/:id - Delete card
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.deleteCard = (req, res, next) => {
   Card.findOneAndRemove({ uid: req.params.id }, (err) => {

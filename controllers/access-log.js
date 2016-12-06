@@ -1,8 +1,15 @@
 const Log = require('../models/Log');
 
 /**
- * GET /access-log
- * Access Log page.
+ * Log module.
+ * @module controllers/access-log
+ */
+
+/**
+ * GET /access-log - Access Log page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.index = (req, res, next) => {
   Log.find((err, logs) => {

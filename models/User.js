@@ -4,6 +4,25 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+/**
+ * @typedef {Object} userSchema
+ * @property {string} email - User email
+ * @property {string} password - User password
+ * @property {string} passwordResetToken - User password reset token
+ * @property {Date} passwordResetExpires - Date when password reset token expires
+ * @property {Array} tokens
+ * @property {Object} profile
+ * @property {string} profile.name - Profile name
+ * @property {string} profile.gender - Profile gender
+ * @property {string} profile.location - Profile location
+ * @property {string} profile.website - Profile website
+ * @property {string} profile.picture - Profile picture
+ */
+
+/**
+ * Creates new userSchema
+ * @class
+ */
 const userSchema = new Schema({
   email: { type: String, unique: true },
   password: String,
@@ -39,6 +58,8 @@ userSchema.pre('save', function save(next) {
 
 /**
  * Helper method for validating user's password.
+ * @param   {string} candidatePassword - Candidate password
+ * @param   {Function} cb - Callback function
  */
 userSchema.methods.comparePassword = function comparePassword(candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
@@ -48,6 +69,8 @@ userSchema.methods.comparePassword = function comparePassword(candidatePassword,
 
 /**
  * Helper method for getting user's gravatar.
+ * @param   {number} size - size of the Gravatar image
+ * @returns {string} - URL of Gravatar image
  */
 userSchema.methods.gravatar = function gravatar(size) {
   if (!size) {

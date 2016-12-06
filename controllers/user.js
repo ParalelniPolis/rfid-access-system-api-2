@@ -6,8 +6,14 @@ const passport = require('passport');
 const User = require('../models/User');
 
 /**
- * GET /login
- * Login page.
+ * User module.
+ * @module controllers/user
+ */
+
+/**
+ * GET /login - Login page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
  */
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -19,8 +25,10 @@ exports.getLogin = (req, res) => {
 };
 
 /**
- * POST /login
- * Sign in using email and password.
+ * POST /login - Sign in using email and password.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.postLogin = (req, res, next) => {
   req.assert('email', 'Email is not valid').isEmail();
@@ -49,8 +57,9 @@ exports.postLogin = (req, res, next) => {
 };
 
 /**
- * GET /logout
- * Log out.
+ * GET /logout - Log out.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
  */
 exports.logout = (req, res) => {
   req.logout();
@@ -58,8 +67,9 @@ exports.logout = (req, res) => {
 };
 
 /**
- * GET /signup
- * Signup page.
+* GET /signup - Signup page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
  */
 exports.getSignup = (req, res) => {
   if (req.user) {
@@ -71,8 +81,10 @@ exports.getSignup = (req, res) => {
 };
 
 /**
- * POST /signup
- * Create a new local account.
+ * POST /signup - Create a new local account.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.postSignup = (req, res, next) => {
   req.assert('email', 'Email is not valid').isEmail();
@@ -112,8 +124,9 @@ exports.postSignup = (req, res, next) => {
 };
 
 /**
- * GET /account
- * Profile page.
+ * GET /account - Profile page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
  */
 exports.getAccount = (req, res) => {
   res.render('account/profile', {
@@ -122,8 +135,10 @@ exports.getAccount = (req, res) => {
 };
 
 /**
- * POST /account/profile
- * Update profile information.
+ * POST /account/profile - Update profile information.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.postUpdateProfile = (req, res, next) => {
   req.assert('email', 'Please enter a valid email address.').isEmail();
@@ -158,8 +173,10 @@ exports.postUpdateProfile = (req, res, next) => {
 };
 
 /**
- * POST /account/password
- * Update current password.
+ * POST /account/password - Update current password.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.postUpdatePassword = (req, res, next) => {
   req.assert('password', 'Password must be at least 4 characters long').len(4);
@@ -184,8 +201,10 @@ exports.postUpdatePassword = (req, res, next) => {
 };
 
 /**
- * POST /account/delete
- * Delete user account.
+ * POST /account/delete - Delete user account.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.postDeleteAccount = (req, res, next) => {
   User.remove({ _id: req.user.id }, (err) => {
@@ -197,8 +216,10 @@ exports.postDeleteAccount = (req, res, next) => {
 };
 
 /**
- * GET /account/unlink/:provider
- * Unlink OAuth provider.
+ * GET /account/unlink/:provider - Unlink OAuth provider.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.getOauthUnlink = (req, res, next) => {
   const provider = req.params.provider;
@@ -215,8 +236,10 @@ exports.getOauthUnlink = (req, res, next) => {
 };
 
 /**
- * GET /reset/:token
- * Reset Password page.
+ * GET /reset/:token - Reset Password page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.getReset = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -238,8 +261,10 @@ exports.getReset = (req, res, next) => {
 };
 
 /**
- * POST /reset/:token
- * Process the reset password request.
+ * POST /reset/:token - Process the reset password request.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.postReset = (req, res, next) => {
   req.assert('password', 'Password must be at least 4 characters long.').len(4);
@@ -298,8 +323,9 @@ exports.postReset = (req, res, next) => {
 };
 
 /**
- * GET /forgot
- * Forgot Password page.
+ * GET /forgot - Forgot Password page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
  */
 exports.getForgot = (req, res) => {
   if (req.isAuthenticated()) {
@@ -311,8 +337,10 @@ exports.getForgot = (req, res) => {
 };
 
 /**
- * POST /forgot
- * Create a random token, then the send user an email with a reset link.
+ * POST /forgot - Create a random token, then the send user an email with a reset link.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.postForgot = (req, res, next) => {
   req.assert('email', 'Please enter a valid email address.').isEmail();

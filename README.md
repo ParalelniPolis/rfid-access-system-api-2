@@ -54,3 +54,9 @@ If you are working on the server part of the app, then you should run the tests 
 ```
 npm test
 ```
+
+## Documentation
+You can generate JSDoc documentation automatically by running
+```
+npm run jsdoc
+```

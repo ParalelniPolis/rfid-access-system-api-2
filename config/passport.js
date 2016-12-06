@@ -34,6 +34,9 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, don
 
 /**
  * Login Required middleware.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {

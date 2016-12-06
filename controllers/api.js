@@ -2,7 +2,15 @@ const Log = require('../models/Log');
 const Card = require('../models/Card');
 
 /**
+ * API module.
+ * @module controllers/api
+ */
+
+/**
  * Function for creating response objects
+ * @param   {string} lockName - Name of the Lock
+ * @param   {boolean} canAccess - Boolean indicating if card can access this Lock
+ * @returns {Object}
  */
 const makeResponseObject = (lockName, canAccess) => {
   const data = {};
@@ -11,8 +19,10 @@ const makeResponseObject = (lockName, canAccess) => {
 };
 
 /**
- * GET /api/v1/access
- * Access API.
+ * GET /api/v1/access - Access API.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.index = (req, res, next) => {
   if (!req.query.lock) {

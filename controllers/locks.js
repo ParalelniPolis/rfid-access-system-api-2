@@ -2,8 +2,15 @@ const Lock = require('../models/Lock');
 const Card = require('../models/Card');
 
 /**
- * GET /locks
- * Locks page.
+ * Log module.
+ * @module controllers/locks
+ */
+
+/**
+ * GET /locks - Locks page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.index = (req, res, next) => {
   Lock.find((err, locks) => {
@@ -19,8 +26,10 @@ exports.index = (req, res, next) => {
 };
 
 /**
- * GET /cards/:id
- * Card detail page.
+ * GET /cards/:id - Card detail page.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.showLock = (req, res, next) => {
   Lock.findOne({ uid: req.params.id }, (err, lock) => {
@@ -39,8 +48,10 @@ exports.showLock = (req, res, next) => {
 };
 
 /**
- * POST /locks
- * Create new lock.
+ * POST /locks - Create new lock.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.postLock = (req, res, next) => {
   req.assert('uid').notEmpty();
@@ -77,8 +88,10 @@ exports.postLock = (req, res, next) => {
 };
 
 /**
- * GET /locks/delete/:id
- * Delete lock.
+ * GET /locks/delete/:id - Delete lock.
+ * @param  {Object} req - Express Request Object
+ * @param  {Object} res - Express Response Object
+ * @param  {Function} next - Express Middleware Function
  */
 exports.deleteLock = (req, res, next) => {
   Lock.findOneAndRemove({ uid: req.params.id }, (err) => {
