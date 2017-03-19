@@ -1,7 +1,7 @@
 const async = require('async');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
-const sgTransport = require('nodemailer-sendgrid-transport');
+const mailgunTransport = require('nodemailer-mailgun-transport');
 const passport = require('passport');
 const User = require('../models/User');
 
@@ -300,9 +300,10 @@ exports.postReset = (req, res, next) => {
         });
     },
     function sendResetPasswordEmail(user, done) {
-      const transporter = nodemailer.createTransport(sgTransport({
+      const transporter = nodemailer.createTransport(mailgunTransport({
         auth: {
-          api_key: process.env.SENDGRID_APIKEY
+          api_key: process.env.MAILGUN_APIKEY,
+          domain: process.env.MAILGUN_DOMAIN
         }
       }));
       const mailOptions = {
@@ -375,9 +376,10 @@ exports.postForgot = (req, res, next) => {
       });
     },
     function sendForgotPasswordEmail(token, user, done) {
-      const transporter = nodemailer.createTransport(sgTransport({
+      const transporter = nodemailer.createTransport(mailgunTransport({
         auth: {
-          api_key: process.env.SENDGRID_APIKEY
+          api_key: process.env.MAILGUN_APIKEY,
+          domain: process.env.MAILGUN_DOMAIN
         }
       }));
       const mailOptions = {
